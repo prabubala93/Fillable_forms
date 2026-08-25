@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor OD Claim Form | UIIC Forms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index.html">&larr; All Forms</a>
+    <div class="spacer"></div>
+    <span class="pdf-status" id="pdfStatus"></span>
+    <button id="downloadBtn">Download as PDF</button>
+  </div>
+
+  <div class="paper-wrap"><div id="formRoot"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="core.js"></script>
+  <script>
+    const root = document.getElementById('formRoot');
+    const U = UIIC;
+
+    root.appendChild(U.letterhead());
+    root.appendChild(U.titleBlock('Motor OD Claim Form', 'The issue of this form is not to be taken as Admission of Liability'));
+
+    let b = U.block('Policy & Insured Details');
+    b.appendChild(U.grid([
+      U.field('Policy No.', { width: 'half' }),
+      U.field('Insured Name', { width: 'half' }),
+      U.field('Insured Address', { width: 'full', type: 'textarea' }),
+      U.field('Pin Code', { width: 'third' }),
+      U.field('State', { width: 'third' }),
+      U.field('Mobile', { width: 'third' }),
+      U.field('E-Mail', { type: 'email', width: 'third' }),
+      U.field('Aadhar No.', { width: 'third' }),
+      U.field('PAN No.', { width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Bank Account Details');
+    b.appendChild(U.grid([
+      U.field('Account No.', { width: 'half' }),
+      U.field('Bank Name', { width: 'half' }),
+      U.field('IFSC Code No.', { width: 'half' }),
+      U.field('Branch Name', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Vehicle Details');
+    b.appendChild(U.grid([
+      U.field('Registration No.', { width: 'third' }),
+      U.field('Make', { width: 'third' }),
+      U.field('Model', { width: 'third' }),
+      U.field('Engine No.', { width: 'half' }),
+      U.field('Chassis No.', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Date & Place of Loss');
+    b.appendChild(U.grid([
+      U.field('Date of Loss', { type: 'date', width: 'third' }),
+      U.field('Time', { width: 'third' }),
+      U.checkGroup('', ['A.M.', 'P.M.'], { width: 'third' }),
+      U.field('Place of Accident / Theft', { width: 'full' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Driver Details');
+    b.appendChild(U.grid([
+      U.field('Driver Name', { width: 'half' }),
+      U.field('Driving Licence No. / Expiry Date', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Accident Details');
+    b.appendChild(U.field('Brief Description', { width: 'full', type: 'textarea' }));
+    b.appendChild(U.field('No. of Occupants Carried', { width: 'third' }));
+    root.appendChild(b);
+
+    b = U.block('Workshop Details');
+    b.appendChild(U.grid([
+      U.field('Name & Address of Workshop', { width: 'full', type: 'textarea' }),
+      U.field('Workshop Mobile', { width: 'third' }),
+      U.field('Email', { type: 'email', width: 'third' }),
+      U.field('Estimate Amount (\u20b9)', { width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Theft Claim');
+    b.appendChild(U.grid([
+      U.checkGroup('Theft of Vehicle', ['Yes', 'No'], { width: 'half' }),
+      U.field('Details', { width: 'half' }),
+      U.checkGroup('Theft of Accessories', ['Yes', 'No'], { width: 'half' }),
+      U.field('Details', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('FIR Details');
+    b.appendChild(U.grid([
+      U.checkGroup('Accident/Theft Reported to Police', ['Yes', 'No'], { width: 'half' }),
+      U.field('Name of Police Station', { width: 'half' }),
+      U.field('Date of Reporting to Police', { type: 'date', width: 'half' }),
+      U.field('FIR / Crime Diary Number', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Third Party Loss Details');
+    b.appendChild(U.grid([
+      U.checkGroup('Any Injury/Death to Driver', ['Yes', 'No'], { width: 'half' }),
+      U.field('Details', { width: 'half' }),
+      U.checkGroup('Any TP Injury/Death', ['Yes', 'No'], { width: 'half' }),
+      U.field('Details', { width: 'half' }),
+      U.checkGroup('Any Injury/Death to Occupant', ['Yes', 'No'], { width: 'half' }),
+      U.field('Details', { width: 'half' }),
+      U.checkGroup('Any TP Property Damage', ['Yes', 'No'], { width: 'half' }),
+      U.field('Details', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Declaration by the Insured');
+    b.appendChild(U.el('div', { class: 'legal', text: 'I/We the above named, do hereby, to the best of my/our knowledge and belief, warrant the truth of the foregoing statement in every respect, and I/We agree that I/We have made, or in any further declaration the company may require in respect of the said accident, shall make any false or fraudulent statement, or any suppression or concealment, the policy shall be void and all rights to recover thereunder in respect of past or future accidents shall be forfeited.' }));
+    b.appendChild(U.grid([
+      U.field('Date', { type: 'date', width: 'third' }),
+      U.field('Place', { width: 'third' })
+    ]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of Insured / Claimant')]));
+    root.appendChild(b);
+
+    root.appendChild(U.footer('Motor OD Claim Form', ''));
+
+    U.bindToolbar('formRoot', 'Motor-OD-Claim-Form.pdf', 'pdfStatus');
+  </script>
+</body>
+</html>

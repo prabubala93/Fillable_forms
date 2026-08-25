@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor Insurance \u2013 Proposal Form | UIIC Forms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index.html">&larr; All Forms</a>
+    <div class="spacer"></div>
+    <span class="pdf-status" id="pdfStatus"></span>
+    <button id="downloadBtn">Download as PDF</button>
+  </div>
+
+  <div class="paper-wrap"><div id="formRoot"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="core.js"></script>
+  <script>
+    const root = document.getElementById('formRoot');
+    const U = UIIC;
+
+    root.appendChild(U.letterhead());
+    root.appendChild(U.titleBlock('Motor Insurance', 'Proposal Form'));
+
+    let b = U.block('Development Officer / Agent');
+    b.appendChild(U.grid([
+      U.field('Development Officer / Agent Code', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Policyholder Details');
+    b.appendChild(U.grid([
+      U.field('Name of Policyholder', { width: 'full' }),
+      U.field('Address', { width: 'full', type: 'textarea' }),
+      U.field('E-mail', { type: 'email', width: 'half' }),
+      U.field('Telephone No.', { width: 'third' }),
+      U.field('Mobile No.', { width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Vehicle Details to be Insured');
+    b.appendChild(U.grid([
+      U.field('1. Registration No.', { width: 'third' }),
+      U.field('2. Date of Registration', { type: 'date', width: 'third' }),
+      U.field('3. Year of Manufacture / Model', { width: 'third' }),
+      U.field('4. Engine No.', { width: 'third' }),
+      U.field('5. Chassis No.', { width: 'third' }),
+      U.field('6. Make of Vehicle', { width: 'third' }),
+      U.field('7. Engine Power (HP-CC)', { width: 'third' }),
+      U.field('8. Unladen Weight (ULW)', { width: 'third' }),
+      U.field('9. Weight Laden with Cargo (RLW)', { width: 'third' }),
+      U.field('10. Seating Capacity', { width: 'third' }),
+      U.field('11. Type of Body', { width: 'third' }),
+      U.field('12. Value of Vehicle (\u20b9)', { width: 'third' }),
+      U.field('13. Period of Insurance \u2014 From', { type: 'date', width: 'third' }),
+      U.field('Period of Insurance \u2014 To', { type: 'date', width: 'third' }),
+      U.field('14. Previous Policy No.', { width: 'third' }),
+      U.field('15. Hire Purchase (HP), if any', { width: 'third' }),
+      U.field('16. Licence No.', { width: 'third' }),
+      U.field('17. Licence Expiry Date', { type: 'date', width: 'third' }),
+      U.field('18. Nominee', { width: 'third' }),
+      U.field('19. No-Claim Bonus (NCB) %', { width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Declaration by Policyholder');
+    b.appendChild(U.el('div', { class: 'legal', text: 'I hereby declare that all the information given in this application is to the best of my knowledge true and I confirm that I have not withheld any material information.' }));
+    b.appendChild(U.grid([
+      U.field('Date', { type: 'date', width: 'third' }),
+      U.field('Place', { width: 'third' })
+    ]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of Policyholder')]));
+    root.appendChild(b);
+
+    b = U.block('Vehicle Inspection Report');
+    b.appendChild(U.grid([
+      U.field('Vehicle No.', { width: 'third' }),
+      U.field('Colour', { width: 'third' }),
+      U.field('Meter Reading', { width: 'third' }),
+    ]));
+    b.appendChild(U.el('div', { class: 'legal', text: 'I certify that on inspection of the above vehicle, it is found to be in good condition.' }));
+    b.appendChild(U.grid([
+      U.field('Date', { type: 'date', width: 'third' }),
+      U.field('Time', { width: 'third' }),
+      U.field('Place', { width: 'third' })
+    ]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of Inspecting Officer')]));
+    b.appendChild(U.field('Name of Inspecting Officer', { width: 'half' }));
+    root.appendChild(b);
+
+    root.appendChild(U.footer('Motor Insurance \u2013 Proposal Form', ''));
+
+    U.bindToolbar('formRoot', 'Motor-Insurance-Proposal-Form.pdf', 'pdfStatus');
+  </script>
+</body>
+</html>

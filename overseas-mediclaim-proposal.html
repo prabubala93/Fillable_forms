@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overseas Mediclaim (Travel Insurance) \u2013 Proposal Form | UIIC Forms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index.html">&larr; All Forms</a>
+    <div class="spacer"></div>
+    <span class="pdf-status" id="pdfStatus"></span>
+    <button id="downloadBtn">Download as PDF</button>
+  </div>
+
+  <div class="paper-wrap"><div id="formRoot"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="core.js"></script>
+  <script>
+    const root = document.getElementById('formRoot');
+    const U = UIIC;
+
+    root.appendChild(U.letterhead());
+    root.appendChild(U.titleBlock('Proposal Form for Overseas Travel Insurance', '(To be submitted in Original with 2 copies)'));
+
+    let b = U.block('I. General Information');
+    b.appendChild(U.grid([
+      U.field('Name of Proposer (in BLOCK letters, as stated in Passport)', { width: 'full' }),
+      U.field('Date of Birth', { type: 'date', width: 'third' }),
+      U.field('Age (completed years)', { width: 'third' }),
+      U.checkGroup('Title', ['Mr.', 'Mrs.', 'Miss.', 'Master'], { width: 'third' }),
+      U.field('Home Address & Telephone No.', { width: 'full' }),
+      U.field('Mobile No.', { width: 'third' }),
+      U.field('E-mail ID', { type: 'email', width: 'third' }),
+      U.field('Proposer\u2019s Actual Occupation', { width: 'third' }),
+      U.field('Office Address', { width: 'full' }),
+      U.field('Telephone No. (Office)', { width: 'third' }),
+      U.field('Passport No.', { width: 'third' }),
+      U.field('Passport Date of Expiry', { type: 'date', width: 'third' }),
+      U.field('Passport Issuing Authority', { width: 'third' }),
+      U.checkGroup('Purpose of Visit', ['Business', 'Holiday Travel'], { width: 'third' }),
+      U.field('Proposed Date of Departure from India (first day of insurance)', { type: 'date', width: 'third' }),
+      U.field('Insurance Required For (number of days)', { width: 'third' }),
+      U.field('Countries to be Visited (with approx. days at each place)', { width: 'full', type: 'textarea' }),
+      U.field('Name, Registration No., Address & Tel. No. of Family Physician', { width: 'full' }),
+      U.field('Physician Mobile No.', { width: 'third' }),
+      U.field('Physician Email ID', { type: 'email', width: 'third' }),
+      U.field('Name of Nominee & Relationship', { width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Plan Opted');
+    b.appendChild(U.checkGroup('Single Trip Plans', ['Plan A-1', 'Plan A-2', 'Plan A-3', 'Plan B-1', 'Plan B-2', 'Plan B-3', 'Plan B-4'], { width: 'full' }));
+    b.appendChild(U.checkGroup('CFT & Multi-Trip Plans', ['Plan E-1', 'Plan E-2', 'Plan MTS-1', 'Plan MTS-2', 'Plan MTS-3'], { width: 'full' }));
+    root.appendChild(b);
+
+    b = U.block('II. Medical History (A) \u2014 To be completed by the Proposer', 'Answer with \u2018YES\u2019 or \u2018NO\u2019 (a dash is not sufficient) and give full details.');
+    const medQs = [
+      'Are you in good health and free from physical and mental disease or infirmity?',
+      'Have you ever suffered from any illness or disease up to 48 months prior to making this proposal?',
+      'Do you have any physical defect or deformity?',
+      'Have you ever been admitted to any hospital / nursing home / clinic for treatment or observation?',
+      'Have you suffered from any illness / disease or had an accident in the past?'
+    ];
+    medQs.forEach(q => b.appendChild(U.checkGroup(q, ['Yes', 'No'], { width: 'full' })));
+    b.appendChild(U.el('div', { class: 'block-note', text: 'If \u2018Yes\u2019 to any of the above, give full details below.' }));
+    b.appendChild(U.table({
+      headers: ['Nature of Illness / Disease / Injury & Treatment Received', 'Date First Treatment Taken', 'Treatment Completed / Continuing', 'Attending Medical Practitioner / Surgeon (Name, Address, Tel.)'],
+      rows: Array(3).fill(0).map(() => Array(4).fill({ input: true }))
+    }));
+    b.appendChild(U.checkGroup('Do you have any intention of engaging in professional sports?', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.field('If so, give details', { width: 'full' }));
+    b.appendChild(U.field('Details of any known ailment, sickness or injury which may require medical attention while on tour abroad', { width: 'full', type: 'textarea' }));
+    root.appendChild(b);
+
+    b = U.block('Declarations by the Proposer');
+    b.appendChild(U.declarations([
+      'I will not be travelling against the advice of a physician.',
+      'I am not on the waiting list for any medical treatment.',
+      'I will not be travelling for the purpose of obtaining medical treatment.',
+      'I have not received a terminal prognosis for a medical condition before this day.'
+    ]));
+    b.appendChild(U.field('Nomination \u2014 Name and Relation of Nominee', { width: 'full' }));
+    root.appendChild(b);
+
+    b = U.block('Proposer\u2019s Declaration & Consent');
+    b.appendChild(U.declarations([
+      'I/We declare on my/our behalf and on behalf of all persons proposed to be insured that the above statements, answers and/or particulars are true and complete to the best of my/our knowledge, and that I/we am/are authorized to propose on behalf of these other persons.',
+      'I understand that the information provided will form the basis of the insurance policy, is subject to the Board-approved underwriting policy of the insurer, and that the policy will come into force only after full receipt of the premium chargeable.',
+      'I/We will notify in writing any change occurring in the occupation or general health of the life to be insured/proposer after the proposal has been submitted but before communication of risk acceptance by the company.',
+      'I/We consent to the company seeking medical information from any doctor or hospital who has attended the life to be insured/proposer, or from any past or present employer, or from any insurer to whom an application for insurance has been made, for underwriting and/or claim settlement.',
+      'I/We authorize the company to share information pertaining to my/our proposal, including medical records, for underwriting and/or claims settlement with any Governmental and/or Regulatory authority.',
+      'I am willing to accept the policy, subject to the terms, exceptions and conditions prescribed therein.'
+    ]));
+    b.appendChild(U.grid([U.field('Date', { type: 'date', width: 'third' }), U.field('Place', { width: 'third' })]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of Proposer')]));
+    root.appendChild(b);
+
+    b = U.block('Medical Examination (to be completed by a doctor holding an M.D. degree)');
+    b.appendChild(U.grid([
+      U.field('History', { width: 'full', type: 'textarea' }),
+      U.field('Past history of disease, operations, accidents, investigations', { width: 'full', type: 'textarea' }),
+      U.field('General Examination', { width: 'full', type: 'textarea' }),
+      U.field('Systemic Examination', { width: 'full', type: 'textarea' }),
+    ]));
+    b.appendChild(U.el('div', { class: 'block-note', text: 'Electrocardiography, blood/urine sugar test findings, and doctor\u2019s opinion on fitness to travel should be attached/noted as applicable.' }));
+    b.appendChild(U.grid([
+      U.field('Name of Doctor', { width: 'third' }),
+      U.field('Qualifications', { width: 'third' }),
+      U.field('Address & Tel. No.', { width: 'third' }),
+    ]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of Doctor')]));
+    root.appendChild(b);
+
+    b = U.block('Statutory Warning');
+    b.appendChild(U.legalBox(
+      '<strong>Section 41, Insurance Act 1938 \u2013 Prohibition of Rebates</strong><ul>' +
+      '<li>No person shall allow or offer to allow, directly or indirectly, any rebate of premium or commission as an inducement to take out, renew or continue an insurance policy, except such rebate as may be allowed in accordance with the published prospectus or tables of the insurer.</li>' +
+      '<li>Any person contravening this section is punishable with a fine which may extend to five hundred rupees.</li></ul>'
+    ));
+    root.appendChild(b);
+
+    root.appendChild(U.footer('Overseas Mediclaim / Travel Insurance \u2013 Proposal Form', ''));
+
+    U.bindToolbar('formRoot', 'Overseas-Mediclaim-Proposal-Form.pdf', 'pdfStatus');
+  </script>
+</body>
+</html>
