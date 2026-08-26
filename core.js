@@ -24,11 +24,9 @@ const UIIC = (() => {
   /* ---------- letterhead / title / footer ---------- */
   function letterhead() {
     return el('div', { class: 'letterhead' }, [
-      el('div', {}, [
-        el('div', { class: 'company', text: 'United India Insurance Company Limited' }),
-        el('div', { class: 'addr', html: 'Corporate Identity Number: U93090TN1938GOI000108<br>Registered Office: 24 Whites Road, Chennai \u2013 600014 &nbsp;|&nbsp; IRDAI Reg. No. 545' })
-      ]),
-      el('div', { class: 'mark', text: 'UIIC' })
+      el('div', { class: 'mark', text: 'UIIC' }),
+      el('div', { class: 'company', text: 'United India Insurance Company Limited' }),
+      el('div', { class: 'addr', html: 'Corporate Identity Number: U93090TN1938GOI000108<br>Registered Office: 24 Whites Road, Chennai \u2013 600014 &nbsp;|&nbsp; IRDAI Reg. No. 545' })
     ]);
   }
 
