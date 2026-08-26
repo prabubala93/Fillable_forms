@@ -44,16 +44,16 @@ body{
 
 .letterhead{
   border-bottom:2px solid var(--rule);
-  padding-bottom:8px;margin-bottom:10px;
-  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+  padding-bottom:10px;margin-bottom:10px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;
 }
-.letterhead .company{font-size:1.05rem;font-weight:700;color:var(--rule);}
-.letterhead .addr{font-size:.72rem;line-height:1.35;color:#333;}
 .letterhead .mark{
   width:46px;height:46px;border:2px solid var(--rule);border-radius:50%;
   display:flex;align-items:center;justify-content:center;font-size:.62rem;
-  text-align:center;color:var(--rule);font-weight:700;flex:none;
+  text-align:center;color:var(--rule);font-weight:700;flex:none;margin-bottom:2px;
 }
+.letterhead .company{font-size:1.05rem;font-weight:700;color:var(--rule);}
+.letterhead .addr{font-size:.72rem;line-height:1.35;color:#333;text-align:center;}
 
 .form-title{text-align:center;margin:10px 0 2px;}
 .form-title h1{font-size:1.15rem;margin:0;color:var(--rule);}
@@ -81,12 +81,16 @@ section.block{margin:14px 0;}
 .field.w-half{flex-basis:calc(50% - 8px);}
 .field.w-third{flex-basis:calc(33.333% - 11px);}
 .field.w-quarter{flex-basis:calc(25% - 12px);}
-.field label{font-size:.7rem;font-weight:600;color:#333;}
-.field input[type=text],.field input[type=date],.field input[type=number],.field input[type=email],.field input[type=tel],.field textarea{
+.field label{font-size:.7rem;font-weight:600;color:#333;margin-bottom:1px;}
+.field input[type=text],.field input[type=date],.field input[type=number],.field input[type=email],.field input[type=tel]{
   border:none;border-bottom:1px solid #444;background:transparent;
-  font-size:.82rem;padding:3px 2px;font-family:inherit;color:var(--ink);
+  font-size:.82rem;line-height:1.15;padding:0 2px 2px;margin:0;height:1.5em;
+  font-family:inherit;color:var(--ink);vertical-align:bottom;
 }
-.field textarea{border:1px solid #888;border-radius:3px;resize:vertical;}
+.field textarea{
+  border:1px solid #888;border-radius:3px;resize:vertical;
+  font-size:.82rem;line-height:1.3;padding:4px 6px;font-family:inherit;color:var(--ink);
+}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);background:#fbfdff;}
 
 .checks{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-top:2px;}
@@ -99,7 +103,8 @@ table.formtable th,table.formtable td{border:1px solid #99a5ae;padding:3px 4px;v
 table.formtable th{background:var(--shade);font-weight:700;text-align:center;}
 table.formtable td.label-col{background:var(--shade);font-weight:600;white-space:normal;width:180px;}
 table.formtable input[type=text],table.formtable input[type=date]{
-  width:100%;border:none;border-bottom:1px solid #99a5ae;background:transparent;font-size:.68rem;padding:2px 1px;
+  width:100%;border:none;border-bottom:1px solid #99a5ae;background:transparent;
+  font-size:.68rem;line-height:1.1;padding:0 1px 1px;margin:0;height:1.4em;vertical-align:bottom;
 }
 table.formtable .yn{display:flex;gap:4px;justify-content:center;white-space:nowrap;}
 table.formtable .yn label{display:flex;align-items:center;gap:2px;}
