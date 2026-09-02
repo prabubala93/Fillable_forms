@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bharat Laghu Udyam Suraksha (Fire) \u2013 Proposal Form | UIIC Forms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index.html">&larr; All Forms</a>
+    <div class="spacer"></div>
+    <span class="pdf-status" id="pdfStatus"></span>
+    <button id="downloadBtn">Download as PDF</button>
+  </div>
+
+  <div class="paper-wrap"><div id="formRoot"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="core.js"></script>
+  <script>
+    const root = document.getElementById('formRoot');
+    const U = UIIC;
+
+    root.appendChild(U.letterhead());
+    root.appendChild(U.titleBlock('Bharat Laghu Udyam Suraksha', 'Proposal Form (Fire & Allied Perils)'));
+    root.appendChild(U.instructions([
+      'This proposal is for covering an enterprise whose total value of insurable assets at a location exceeds \u20b95 Crore but does not exceed \u20b950 Crore, against Fire and Allied Perils.',
+      'Read the Prospectus / Key Features Document / Policy Wordings before filling up this proposal form.',
+      'The property proposed for insurance is not covered until the proposal is accepted and the premium is paid.'
+    ]));
+
+    let b = U.block('Agent Details');
+    b.appendChild(U.grid([
+      U.field('Agent\u2019s Name', { width: 'half' }),
+      U.field('Code No.', { width: 'half' }),
+      U.field('Issuing Office / Branch Code', { width: 'half' }),
+      U.field('Office Address', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('A. Details about Proposer and Policy Period');
+    b.appendChild(U.grid([
+      U.field('1. Name of Proposer', { width: 'full' }),
+      U.field('2. Address of Proposer', { width: 'full', type: 'textarea' }),
+      U.field('3. Telephone No. (Landline)', { width: 'third' }),
+      U.field('4. Mobile No.', { width: 'third' }),
+      U.field('5. Email', { type: 'email', width: 'third' }),
+      U.field('6a. Contact Person Name (if not an individual)', { width: 'half' }),
+      U.field('6b. Designation', { width: 'half' }),
+      U.field('7. Policy to be Issued in Favour of (all parties with insurable interest, incl. financial institutions)', { width: 'full', type: 'textarea' }),
+      U.field('8. Period of Insurance \u2014 From', { type: 'date', width: 'third' }),
+      U.field('Period of Insurance \u2014 To', { type: 'date', width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('B. Business and Location of Business');
+    b.appendChild(U.field('9. Business of Proposer', { width: 'full' }));
+    b.appendChild(U.el('div', { class: 'block-note', text: '10. Location of risk / business to be covered \u2014 full postal address with Pin Code' }));
+    b.appendChild(U.table({
+      headers: ['Sl. No.', 'Address with Pin Code', 'Occupancy', 'Age of Unit', 'Floor (GF/MF/Higher)'],
+      rows: [1, 2, 3, 4].map(n => [String(n), { input: true }, { input: true }, { input: true }, { input: true }])
+    }));
+    root.appendChild(b);
+
+    b = U.block('Declaration by Proposer');
+    b.appendChild(U.el('div', { class: 'legal', text: 'I/We hereby declare that the above statements and answers are true and that I/We have not withheld any information regarding the proposal. I/We agree that this proposal and declaration shall form the basis of the contract with United India Insurance Co. Ltd., whose policy for the insurance proposed is acceptable to me/us. I/We undertake to exercise all ordinary and responsible precautions for the safety of the property as if it were uninsured.' }));
+    b.appendChild(U.grid([
+      U.field('Date', { type: 'date', width: 'third' }),
+      U.field('Place', { width: 'third' })
+    ]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of Proposer')]));
+    root.appendChild(b);
+
+    b = U.block('Statutory Warning');
+    b.appendChild(U.statutoryWarningBlock());
+    root.appendChild(b);
+
+    root.appendChild(U.el('div', { class: 'block-note', text: 'Note: only page 1 of the source draft (general proposer, business and location details) was provided. Add further sections here (construction, protections, sum insured schedule, add-on covers, etc.) as needed once the remaining pages of your master draft are available.' }));
+
+    root.appendChild(U.footer('Bharat Laghu Udyam Suraksha \u2013 Proposal Form', ''));
+
+    U.bindToolbar('formRoot', 'Fire-Proposal-Form.pdf', 'pdfStatus');
+  </script>
+</body>
+</html>

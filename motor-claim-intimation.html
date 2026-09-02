@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor Claim Intimation Form | UIIC Forms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index.html">&larr; All Forms</a>
+    <div class="spacer"></div>
+    <span class="pdf-status" id="pdfStatus"></span>
+    <button id="downloadBtn">Download as PDF</button>
+  </div>
+
+  <div class="paper-wrap"><div id="formRoot"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="core.js"></script>
+  <script>
+    const root = document.getElementById('formRoot');
+    const U = UIIC;
+
+    root.appendChild(U.letterhead());
+    root.appendChild(U.titleBlock('Claim Intimation Form', 'Motor Insurance'));
+
+    let b = U.block('Loss / Claim Details');
+    b.appendChild(U.grid([
+      U.field('1. Policy No.', { width: 'half' }),
+      U.field('2. Policy Period', { width: 'half' }),
+      U.field('3. Vehicle Registration Number', { width: 'half' }),
+      U.field('4. Type of Vehicle / Make of Vehicle', { width: 'half' }),
+      U.field('5. Name of the Insured', { width: 'full' }),
+      U.field('6. Correspondence Address / Email ID', { width: 'full', type: 'textarea' }),
+      U.field('7. Mobile Number', { width: 'half' }),
+      U.field('8. Contact Person Reporting Loss', { width: 'half' }),
+      U.field('9. Mobile Number of Contact Person', { width: 'half' }),
+      U.field('10. Name of the Driver', { width: 'half' }),
+      U.field('11. Date & Time of Accident', { type: 'text', width: 'half', placeholder: 'DD/MM/YYYY, HH:MM' }),
+      U.field('12. Place of Accident', { width: 'half' }),
+      U.field('13. Cause of Accident / Brief Description of Loss / Damage', { width: 'full', type: 'textarea' }),
+      U.field('14. IDV', { width: 'third' }),
+      U.field('15. Estimated Loss', { width: 'third' }),
+      U.field('16. FIR No. / GD Entry / Date', { width: 'third' }),
+      U.checkGroup('17. Spot Survey Done / Spot Photos Taken', ['Yes', 'No'], { width: 'half' }),
+      U.field('18. Name of Spot / Final Surveyor', { width: 'half' }),
+      U.field('19. Name of Workshop & Address Where Vehicle Can Be Inspected, with Contact No.', { width: 'full', type: 'textarea' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('20. Signature of the Insured');
+    b.appendChild(U.grid([
+      U.field('Date', { type: 'date', width: 'third' }),
+      U.field('Place', { width: 'third' })
+    ]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of the Insured')]));
+    root.appendChild(b);
+
+    root.appendChild(U.footer('Claim Intimation Form \u2014 Motor Insurance', ''));
+
+    U.bindToolbar('formRoot', 'Motor-Claim-Intimation-Form.pdf', 'pdfStatus');
+  </script>
+</body>
+</html>

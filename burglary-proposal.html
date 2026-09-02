@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burglary & House-Breaking Insurance \u2013 Proposal Form | UIIC Forms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index.html">&larr; All Forms</a>
+    <div class="spacer"></div>
+    <span class="pdf-status" id="pdfStatus"></span>
+    <button id="downloadBtn">Download as PDF</button>
+  </div>
+
+  <div class="paper-wrap"><div id="formRoot"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="core.js"></script>
+  <script>
+    const root = document.getElementById('formRoot');
+    const U = UIIC;
+
+    root.appendChild(U.letterhead());
+    root.appendChild(U.titleBlock('Proposal Form for Burglary and House-Breaking Insurance', 'Business Premises'));
+    root.appendChild(U.el('div', { class: 'legal', html:
+      '<strong>Scope of Cover</strong> \u2014 This policy provides cover against loss or damage by burglary or house-breaking (i.e. theft following an actual forcible and violent entry of and/or exit from the premises) in respect of contents of offices, warehouses, shops, etc. and cash in a safe or strong room, and also damage caused to the premises, except as detailed below.<br><br>' +
+      '<strong>Exclusions</strong> \u2014 This policy does not cover loss or damage arising from War and Warlike operations, Riots and Strikes, Civil Commotion, Terrorist Activities, convulsions of nature and/or consequential loss, or by use of the keys to a safe unless obtained by force or threat, caused by an insured employee or member of the family. On payment of additional premium, cover can be extended to include Riot & Strike and Terrorist Activity risks.'
+    }));
+
+    let b = U.block('1. Proposer', 'Note: Please answer every question fully.');
+    b.appendChild(U.grid([
+      U.field('a. Name and Address of Proposer', { width: 'full', type: 'textarea' }),
+      U.field('b. Name of Financial Institution(s) (if any financial interest involved)', { width: 'full' }),
+      U.field('c. Nature of Trade or Business', { width: 'full' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('2. Premises to be Insured');
+    b.appendChild(U.field('Address of Premises to be Insured', { width: 'full', type: 'textarea' }));
+    root.appendChild(b);
+
+    b = U.block('3. Occupancy of Premises');
+    b.appendChild(U.grid([
+      U.field('a. Whether Warehouse, Godown, Shop or Office?', { width: 'half' }),
+      U.field('b. How long have you been an occupant of premises?', { width: 'half' }),
+      U.checkGroup('c. Are you the sole occupant?', ['Yes', 'No'], { width: 'half' }),
+      U.field('d. If not, who are the other occupants?', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('4. Construction Materials', 'What materials are used for construction? (e.g. Concrete, Bricks, Iron sheet, Timber, etc.)');
+    b.appendChild(U.grid([
+      U.field('a. Walls', { width: 'third' }),
+      U.field('b. Roof', { width: 'third' }),
+      U.field('c. Floor', { width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('5. Protection Provided To');
+    b.appendChild(U.grid([
+      U.field('a. Doors', { width: 'half' }),
+      U.field('b. Windows', { width: 'half' }),
+      U.field('c. Skylights, Ventilators, Exhaust Fans, Lights, Air-conditioners, Trap doors', { width: 'full' }),
+      U.field('d. Any special precautions adopted for safeguarding your property? (list)', { width: 'full', type: 'textarea' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('6. Occupation of Premises at Night');
+    b.appendChild(U.grid([
+      U.checkGroup('a. Are the premises occupied by you at night?', ['Yes', 'No'], { width: 'half' }),
+      U.field('If not, by whom?', { width: 'half' }),
+      U.checkGroup('b. Will the premises be guarded by a watchman?', ['Yes', 'No'], { width: 'half' }),
+      U.field('If so, how many & during what time?', { width: 'half' }),
+      U.checkGroup('c. Is the premises left unoccupied at any time?', ['Yes', 'No'], { width: 'half' }),
+      U.field('d. If so, how often and for how long?', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('7. Safe(s)');
+    b.appendChild(U.checkGroup('a. Are the valuables secured in safe(s), outside business hours?', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.grid([
+      U.field('b. Maker\u2019s Name of the Safe', { width: 'half' }),
+      U.field('Height', { width: 'quarter' }), U.field('Width', { width: 'quarter' }), U.field('Depth', { width: 'quarter' }), U.field('Weight', { width: 'quarter' }),
+      U.field('c. How many keys are there and with whom are they kept? Can the safe be opened by a single key or a combination of two or more keys?', { width: 'full', type: 'textarea' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('8. Stock and Sales Books');
+    b.appendChild(U.grid([
+      U.checkGroup('a. Are stock and sales books maintained?', ['Yes', 'No'], { width: 'half' }),
+      U.field('b. How frequently are these entered?', { width: 'half' }),
+      U.field('c. How often is stock taken?', { width: 'half' }),
+      U.field('d. Where are these books kept outside business hours?', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('9. Previous Losses');
+    b.appendChild(U.checkGroup('a. Have any premises occupied by you been entered by thieves?', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.field('b. If so, give full particulars stating when and how access was obtained and the extent of the loss', { width: 'full', type: 'textarea' }));
+    b.appendChild(U.field('c. What precautions have been adopted to prevent such recurrence?', { width: 'full', type: 'textarea' }));
+    root.appendChild(b);
+
+    b = U.block('10. Current Insurance');
+    b.appendChild(U.checkGroup('Is the risk currently insured against burglary?', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.grid([
+      U.field('a. Name of Insurance Company', { width: 'third' }),
+      U.field('b. Policy No.', { width: 'third' }),
+      U.field('c. Period', { width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('11. Insurance History');
+    b.appendChild(U.el('div', { class: 'block-note', text: 'Has any Company, in respect of your Burglary Insurance:' }));
+    b.appendChild(U.checkGroup('a. Declined your proposal?', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.checkGroup('b. Cancelled or refused to renew your policy?', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.checkGroup('c. Accepted your proposal on special terms and conditions?', ['Yes', 'No'], { width: 'full' }));
+    root.appendChild(b);
+
+    b = U.block('12. Claims History');
+    b.appendChild(U.checkGroup('Have you ever claimed upon any Company for loss by Burglary or House-Breaking?', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.field('If so, give details', { width: 'full', type: 'textarea' }));
+    root.appendChild(b);
+
+    b = U.block('13 & 15. Additional Cover');
+    b.appendChild(U.field('13. Amount for which contents are currently insured against Fire, and name of the Company', { width: 'full' }));
+    b.appendChild(U.checkGroup('15. Do you need cover against Riot, Strike and Terrorist activities on payment of additional premium?', ['Yes', 'No'], { width: 'full' }));
+    root.appendChild(b);
+
+    b = U.block('14 & 16. Property to be Insured');
+    b.appendChild(U.el('div', { class: 'block-note', text: '14. Give full description of contents (property to be insured) of the premises.' }));
+    b.appendChild(U.table({
+      headers: ['Item', 'Description', 'Sum to be Insured (\u20b9)'],
+      rows: [
+        ['a. Stock-in-Trade (as described in item 14 above)', { input: true }, { input: true }],
+        ['b. Goods held in trust or on commission for which proposer is responsible', { input: true }, { input: true }],
+        ['c. Furniture, Fixtures, Fittings, Utensils and appliances in trade', { input: true }, { input: true }],
+        ['d. Coins and/or Currency Notes in a locked safe', { input: true }, { input: true }],
+        ['e. Others (to be specified)', { input: true }, { input: true }],
+      ]
+    }));
+    b.appendChild(U.el('div', { class: 'block-note', text: 'Note: To obtain full indemnity it is necessary to insure for the full value of the property in the premises.' }));
+    root.appendChild(b);
+
+    b = U.block('17. Period of Insurance');
+    b.appendChild(U.grid([
+      U.field('From', { type: 'date', width: 'third' }),
+      U.field('To', { type: 'date', width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('Declaration by Proposer');
+    b.appendChild(U.el('div', { class: 'legal', text: 'I/We hereby declare that the above statements and answers are true and that I/We have not withheld any information regarding the proposal. I/We agree that this proposal and declaration shall be the basis of the contract between me/us and United India Insurance Co. Ltd., whose policy for the insurance proposed is acceptable to me/us. I/We undertake to exercise all ordinary and responsible precautions for the safety of the property as if it were uninsured.' }));
+    b.appendChild(U.grid([
+      U.field('Date', { type: 'date', width: 'third' }),
+      U.field('Place', { width: 'third' })
+    ]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of Proposer')]));
+    root.appendChild(b);
+
+    b = U.block('Development Officer\u2019s Report');
+    b.appendChild(U.grid([
+      U.field('The proposer is known to me / my agent for (years)', { width: 'half' }),
+      U.field('Name and Code No.', { width: 'half' }),
+      U.field('Date', { type: 'date', width: 'third' }),
+      U.field('Place', { width: 'third' }),
+    ]));
+    b.appendChild(U.el('div', { class: 'block-note', text: 'I recommend acceptance of this proposal.' }));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of Development Officer')]));
+    root.appendChild(b);
+
+    b = U.block('Prohibition of Rebates');
+    b.appendChild(U.legalBox(
+      '<strong>Section 41, Insurance Act 1938</strong><ul>' +
+      '<li>No person shall allow or offer to allow, directly or indirectly, any rebate of premium or commission as an inducement to take out, renew or continue an insurance policy, except such rebate as may be allowed in accordance with the published prospectus or tables of the insurer.</li>' +
+      '<li>Any person contravening this section is punishable with a fine which may extend to five hundred rupees.</li></ul>'
+    ));
+    root.appendChild(b);
+
+    root.appendChild(U.footer('Burglary & House-Breaking Insurance \u2013 Proposal Form', 'MISC-11'));
+
+    U.bindToolbar('formRoot', 'Burglary-Proposal-Form.pdf', 'pdfStatus');
+  </script>
+</body>
+</html>
