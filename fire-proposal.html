@@ -59,7 +59,7 @@
     b.appendChild(U.field('9. Business of Proposer', { width: 'full' }));
     b.appendChild(U.el('div', { class: 'block-note', text: '10. Location of risk / business to be covered \u2014 full postal address with Pin Code' }));
     b.appendChild(U.table({
-      headers: ['Sl. No.', 'Address with Pin Code', 'Occupancy', 'Age of Unit', 'Floor (GF/MF/Higher)'],
+      headers: ['Sl. No.', 'Address with Pin Code', 'Occupancy', 'Sum Insured','Type of Risk (Building/Stock/Machinery/Furniture and Fittings)'],
       rows: [1, 2, 3, 4].map(n => [String(n), { input: true }, { input: true }, { input: true }, { input: true }])
     }));
     root.appendChild(b);
