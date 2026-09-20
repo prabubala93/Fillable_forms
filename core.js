@@ -72,7 +72,9 @@ const UIIC = (() => {
     if (type === 'textarea') {
       wrap.appendChild(el('textarea', { rows: opts.rows || 2 }));
     } else {
-      wrap.appendChild(el('input', { type, placeholder: opts.placeholder || '' }));
+      const line = el('div', { class: 'input-line' });
+      line.appendChild(el('input', { type, placeholder: opts.placeholder || '' }));
+      wrap.appendChild(line);
     }
     return wrap;
   }
@@ -101,7 +103,11 @@ const UIIC = (() => {
   function cell(spec) {
     if (typeof spec === 'string') return el('td', { text: spec });
     if (spec.label) return el('td', { class: 'label-col', text: spec.text || '' });
-    if (spec.input) return el('td', {}, el('input', { type: spec.dtype || 'text' }));
+    if (spec.input) {
+      const line = el('div', { class: 'input-line' });
+      line.appendChild(el('input', { type: spec.dtype || 'text' }));
+      return el('td', {}, line);
+    }
     if (spec.yn) {
       const c = el('td');
       const wrap = el('div', { class: 'yn' });
