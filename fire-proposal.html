@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bharat Laghu Udyam Suraksha (Fire) \u2013 Proposal Form | UIIC Forms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index.html">&larr; All Forms</a>
+    <div class="spacer"></div>
+    <span class="pdf-status" id="pdfStatus"></span>
+    <button id="downloadBtn">Download as PDF</button>
+  </div>
+
+  <div class="paper-wrap"><div id="formRoot"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="core.js"></script>
+  <script>
+    const root = document.getElementById('formRoot');
+    const U = UIIC;
+
+    root.appendChild(U.letterhead());
+    root.appendChild(U.titleBlock('Bharat Laghu Udyam Suraksha', 'Proposal Form (Fire & Allied Perils)'));
+    root.appendChild(U.instructions([
+      'This proposal is for covering an enterprise whose total value of insurable assets at a location exceeds \u20b95 Crore but does not exceed \u20b950 Crore, against Fire and Allied Perils.',
+      'Read the Prospectus / Key Features Document / Policy Wordings before filling up this proposal form.',
+      'The property proposed for insurance is not covered until the proposal is accepted and the premium is paid.'
+    ]));
+
+    let b = U.block('Agent Details');
+    b.appendChild(U.grid([
+      U.field('Agent\u2019s Name', { width: 'half' }),
+      U.field('Code No.', { width: 'half' }),
+      U.field('Issuing Office / Branch Code', { width: 'half' }),
+      U.field('Office Address', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    // ---------- Page 1 ----------
+    b = U.block('A. Details about Proposer and Policy Period');
+    b.appendChild(U.grid([
+      U.field('1. Name of Proposer', { width: 'full' }),
+      U.field('2. Address of Proposer', { width: 'full', type: 'textarea' }),
+      U.field('3. Telephone No. (Landline)', { width: 'third' }),
+      U.field('4. Mobile No.', { width: 'third' }),
+      U.field('5. Email', { type: 'email', width: 'third' }),
+      U.field('6a. Contact Person Name (if not an individual)', { width: 'half' }),
+      U.field('6b. Designation', { width: 'half' }),
+      U.field('7. Policy to be Issued in Favour of (all parties with insurable interest, incl. financial institutions)', { width: 'full', type: 'textarea' }),
+      U.field('8. Period of Insurance \u2014 From', { type: 'date', width: 'third' }),
+      U.field('Period of Insurance \u2014 To', { type: 'date', width: 'third' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('B. Business and Location of Business');
+    b.appendChild(U.field('9. Business of Proposer', { width: 'full' }));
+    b.appendChild(U.el('div', { class: 'block-note', text: '10. Location of risk / business to be covered \u2014 full postal address with Pin Code' }));
+    b.appendChild(U.table({
+      headers: ['Sl. No.', 'Address with Pin Code', 'Occupancy', 'Age of Unit', 'Floor (GF/MF/Higher)'],
+      rows: [1, 2, 3, 4].map(n => [String(n), { input: true }, { input: true }, { input: true }, { input: true }])
+    }));
+    root.appendChild(b);
+
+    // ---------- Page 2 ----------
+    b = U.block('C. Details About Business Covered at the Insured Location');
+    b.appendChild(U.el('div', { class: 'block-note', text: '11. The Insured property is \u2014 please tick as applicable:' }));
+    b.appendChild(U.checkGroup('a. Offices, shops, hotels etc.', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.checkGroup('b. Industrial / manufacturing risks', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.checkGroup('c. Storage outside Industrial / manufacturing risks', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.checkGroup('d. Tanks / gas holders outside industrial / manufacturing risks', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.checkGroup('e. Utilities located outside Industrial / manufacturing risks', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.checkGroup('f. Boundary wall', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.checkGroup('g. Basement storage', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.field('If \u2018Yes\u2019 to basement storage, value stored SI (\u20b9)', { width: 'half' }));
+    b.appendChild(U.field('h. Others (please specify)', { width: 'full' }));
+    root.appendChild(b);
+
+    b = U.block('12\u201314. Nature of Use');
+    b.appendChild(U.field('12. If used as warehouse / godown (not located in a manufacturing unit), list of goods stored', { width: 'full', type: 'textarea' }));
+    b.appendChild(U.field('13. If used as an Industrial Manufacturing unit, products manufactured at the location proposed (attach detailed block plan showing facilities, wherever applicable)', { width: 'full', type: 'textarea' }));
+    b.appendChild(U.field('14. If used as an Industrial Manufacturing Unit, state whether the factory is working or silent', { width: 'full' }));
+    root.appendChild(b);
+
+    b = U.block('15. Fire Protection Devices Installed', 'Please tick the correct answer(s) in the box below.');
+    b.appendChild(U.checkGroup('', ['Portable Extinguishers', 'Small bore hose reels', 'Trailer Pumps / Fire engines', 'Hydrant System', 'Sprinkler System', 'Fixed Water Spray System', 'Foam System', 'Fire Alarm System', 'Gas Flooding System'], { width: 'full' }));
+    b.appendChild(U.field('Others, please specify', { width: 'full' }));
+    root.appendChild(b);
+
+    b = U.block('16. Fire Protection AMC');
+    b.appendChild(U.checkGroup('Indicate whether AMC (Annual Maintenance Contract) for the Fire Protection Appliances is in force', ['Yes', 'No'], { width: 'full' }));
+    root.appendChild(b);
+
+    b = U.block('17. Construction Details');
+    b.appendChild(U.el('div', { class: 'block-note', text: 'a. Please state material used \u2014 tick the correct answer.' }));
+    b.appendChild(U.grid([
+      U.checkGroup('i. Walls', ['Kutcha', 'Pucca'], { width: 'third' }),
+      U.checkGroup('ii. Floor', ['Kutcha', 'Pucca'], { width: 'third' }),
+      U.checkGroup('iii. Roof', ['Kutcha', 'Pucca'], { width: 'third' }),
+    ]));
+    b.appendChild(U.el('div', { class: 'block-note', text: 'Kutcha: building(s) with wall and/or roof of wooden planks, thatched leaves and/or grass/hay of any kind, bamboo, plastic cloth, asphalt, canvas/tarpaulin and the like. Pucca: buildings other than Kutcha.' }));
+    b.appendChild(U.grid([
+      U.field('b. Number of Floors', { width: 'third' }),
+      U.checkGroup('c. Age of the Building', ['Less than 5 years', '5\u201310 years', '10\u201320 years', 'Above 20 years'], { width: 'full' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('18\u201320. Location, Other Insurance & Declinature');
+    b.appendChild(U.field('18. Distance between the risk to be covered and the nearest Fire Brigade', { width: 'full' }));
+    b.appendChild(U.field('19. Whether you have insured the same property with any other Insurance Company with the same type of coverage (give details)', { width: 'full', type: 'textarea' }));
+    b.appendChild(U.field('20. Whether Insurance was declined by any other Company (give details)', { width: 'full', type: 'textarea' }));
+    root.appendChild(b);
+
+    b = U.block('21. Premium / Claim Details for the Past 36 Months', 'Excluding the expiring policy period.');
+    b.appendChild(U.table({
+      headers: ['Year', 'Premium (\u20b9)', 'Claim (\u20b9)'],
+      rows: [1, 2, 3, 4, 5].map(() => [{ input: true }, { input: true }, { input: true }]).concat([['TOTAL', { input: true }, { input: true }]])
+    }));
+    root.appendChild(b);
+
+    // ---------- Page 3 ----------
+    b = U.block('D. Sum Insured and Other Details of Insured Property');
+    b.appendChild(U.el('div', { class: 'legal', html:
+      'Indicate Sum Insured on the following basis:<ul>' +
+      '<li>For Building, Plant and Machinery, Furniture, Fixture and Fittings and other contents: <strong>Reinstatement Value</strong>.</li>' +
+      '<li>For raw material: <strong>Landed Cost</strong>.</li>' +
+      '<li>For stock in process: <strong>Input Cost</strong>.</li>' +
+      '<li>For finished stock: manufacturing cost of the finished stock or the Contract Price* of goods sold but not delivered, as applicable.</li></ul>' +
+      '*Contract Price is in respect only of goods sold but not delivered, for which you are responsible and with regard to which, under the conditions of sale, the sale contract is cancelled by reason of any Damage insured under this Policy either wholly or to the extent of the Damage. The Company\u2019s liability shall be based on the Contract Price.'
+    }));
+    b.appendChild(U.el('div', { class: 'block-note', text: '22. Description of block-wise sum insured' }));
+    b.appendChild(U.table({
+      headers: ['Description of Block', 'Building incl. plinth, basement & additional structures', 'Plant & Machinery', 'Furniture & Fixtures, Fittings and other equipment', 'Raw Material', 'Stock in Process', 'Finished Stock', 'Other Contents (please specify)', 'Total (\u20b9)'],
+      rows: [1, 2, 3].map(() => Array(8).fill({ input: true }))
+    }));
+    root.appendChild(b);
+
+    b = U.block('E. Standard Add-ons');
+    b.appendChild(U.el('div', { class: 'block-note', text: 'I. Do you want to opt for Floater Cover? (strike off what is not applicable). If yes, give details below:' }));
+    b.appendChild(U.checkGroup('Floater Cover', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.el('div', { class: 'block-note', text: '23. Floater Cover (for stocks at various locations)' }));
+    b.appendChild(U.table({
+      headers: ['Location (Postal Address with Pin Code)', 'Sum Insured (in \u20b9)'],
+      rows: [1, 2, 3].map(() => [{ input: true }, { input: true }])
+    }));
+    b.appendChild(U.grid([
+      U.field('i. Maximum value at any one location (\u20b9)', { width: 'half' }),
+      U.checkGroup('ii. Whether stocks stored in open', ['Yes', 'No'], { width: 'half' }),
+    ]));
+    b.appendChild(U.el('div', { class: 'block-note', text: 'II. Do you want to opt for Declaration Policy? (strike off what is not applicable). If yes, give details below:' }));
+    b.appendChild(U.checkGroup('Declaration Policy', ['Yes', 'No'], { width: 'full' }));
+    b.appendChild(U.field('24. Stocks which fluctuate in value to be covered on (monthly) declaration basis \u2014 Amount (\u20b9)', { width: 'half' }));
+    root.appendChild(b);
+
+    // ---------- Page 4 ----------
+    b = U.block('F. Premium Details');
+    b.appendChild(U.grid([
+      U.field('25. Mode of Payment', { width: 'half' }),
+      U.field('Payment Details', { width: 'half' }),
+      U.field('Amount (\u20b9)', { width: 'half' }),
+      U.field('Amount in Words', { width: 'half' }),
+    ]));
+    root.appendChild(b);
+
+    b = U.block('G. Declaration by Insured');
+    b.appendChild(U.el('div', { class: 'legal', text: 'I hereby declare that the value of insurable assets is more than \u20b95 Crore but less than \u20b950 Crore and the statements made by me/us in this Proposal Form are true to the best of my/our knowledge and belief, and I/we hereby agree that this declaration shall form the basis of the contract between me/us and the United India Insurance Company Ltd. If any additions or alterations are carried out in the risk proposed after the submission of this proposal form, then the same should be conveyed to the insurers immediately.' }));
+    b.appendChild(U.grid([
+      U.field('Date', { type: 'date', width: 'third' }),
+      U.field('Place', { width: 'third' })
+    ]));
+    b.appendChild(U.el('div', { class: 'sig-row' }, [U.signaturePad('Signature of the Proposer')]));
+    root.appendChild(b);
+
+    b = U.block('Insurance Act 1938, Section 41 \u2014 Prohibition of Rebates');
+    b.appendChild(U.el('div', { class: 'legal', text: 'No person shall allow or offer to allow either directly or indirectly, as an inducement to any person to take out or renew or continue an insurance in respect of any kind of risk relating to lives or property in India, any rebate of the whole or part of the commission payable or any rebate of the premium shown on the policy, nor shall any person taking out or renewing a policy accept any rebate, except such rebate as may be allowed in accordance with the published prospectus or tables of the insurer.' }));
+    b.appendChild(U.el('div', { class: 'legal', text: 'Any person making default in complying with the provisions of this section shall be punishable with fine which may extend to ten lakhs rupees.' }));
+    root.appendChild(b);
+
+    root.appendChild(U.footer('Bharat Laghu Udyam Suraksha \u2013 Proposal Form', ''));
+
+    U.bindToolbar('formRoot', 'Fire-Proposal-Form.pdf', 'pdfStatus');
+  </script>
+</body>
+</html>
